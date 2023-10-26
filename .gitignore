@@ -2,4 +2,4 @@ bin/
 obj/
 src/gfx/*
 !src/gfx/convimg.yaml
-!src/gfx/rickroll.gif
+!src/gfx/rickroll/

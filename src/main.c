@@ -21,7 +21,7 @@ int main(void)
 
     gfx_FillScreen(2);
     /* Draw a normal sprite */
-    gfx_Sprite(rickroll, 32 , 0);
+    gfx_Sprite(frame_0, 32 , 0);
 
     while (!os_GetCSC()); // wait for a key
 
