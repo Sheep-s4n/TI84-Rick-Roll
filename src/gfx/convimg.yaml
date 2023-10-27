@@ -9,6 +9,7 @@ converts:
   - name: sprites
     palette: global_palette
     transparent-color-index: 0
+    compress : 'zx0'
     images:
       
       - rickroll/frame_0.gif
@@ -68,7 +69,7 @@ converts:
 
 outputs:
   - type: c
-    include-file: gfx.gif
+    include-file: gfx.h
     palettes:
       - global_palette
     converts:

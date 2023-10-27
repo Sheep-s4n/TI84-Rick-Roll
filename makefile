@@ -7,7 +7,6 @@ ICON = astley.png
 DESCRIPTION = "Rick roll your friends even on a calculator"
 COMPRESSED = NO
 
-LTO = YES
 CFLAGS = -Wall -Wextra -Oz
 CXXFLAGS = -Wall -Wextra -Oz
 
