@@ -10,133 +10,92 @@
 #define SCREEN_X_MAX 320 
 #define SCREEN_Y_MAX 240 
 #define IMAGE_X 255
-#define FRAME_NUMBER 54
+#define FRAME_NUMBER 40
 #define SPRITE_SIZE 120
 #define X_DRAW (SCREEN_X_MAX - SPRITE_SIZE) / 2
-#define Y_DRAW (SCREEN_Y_MAX - SPRITE_SIZE) / 2
+#define Y_DRAW (SCREEN_Y_MAX - SPRITE_SIZE) / 2 - (SCREEN_Y_MAX - SPRITE_SIZE) / 6
 
+bool key_press = false;
 
-void drawFrame(gfx_sprite_t* spriteBuffer , unsigned char* frame_data) {
-    zx0_Decompress(spriteBuffer , frame_data);
-    gfx_TransparentSprite(spriteBuffer, X_DRAW , Y_DRAW);
-    msleep(20);
+unsigned char* frames_data[FRAME_NUMBER] = {
+    frame_0_compressed,
+    frame_1_compressed,
+    frame_2_compressed,
+    frame_3_compressed,
+    frame_4_compressed,
+    frame_5_compressed,
+    frame_6_compressed,
+    frame_7_compressed,
+    frame_8_compressed,
+    frame_9_compressed,
+    frame_10_compressed,
+    frame_11_compressed,
+    frame_12_compressed,
+    frame_13_compressed,
+    frame_14_compressed,
+    frame_15_compressed,
+    frame_16_compressed,
+    frame_17_compressed,
+    frame_18_compressed,
+    frame_19_compressed,
+    frame_20_compressed,
+    frame_21_compressed,
+    frame_22_compressed,
+    frame_23_compressed,
+    frame_24_compressed,
+    frame_25_compressed,
+    frame_26_compressed,
+    frame_27_compressed,
+    frame_28_compressed,
+    frame_29_compressed,
+    frame_30_compressed,
+    frame_31_compressed,
+    frame_32_compressed,
+    frame_33_compressed,
+    frame_34_compressed,
+    frame_35_compressed,
+    frame_36_compressed,
+    frame_37_compressed,
+    frame_38_compressed,
+    frame_39_compressed,
+};
+
+void gfx_init() {
+    gfx_SetTextFGColor(254);
+    gfx_SetTextScale(1 , 2);
+    gfx_SetPalette(global_palette, sizeof_global_palette, 0);
+    gfx_SetTransparentColor(0);
+    gfx_FillScreen(2);
+}
+
+void drawFrame(gfx_sprite_t* sprite_buffer , unsigned char* frame_data) {
+    if (key_press) return;
+    if (os_GetCSC()) key_press = true;
+    zx0_Decompress(sprite_buffer , frame_data);
+    gfx_TransparentSprite(sprite_buffer, X_DRAW , Y_DRAW);
+    gfx_PrintStringXY("You just got rick rolled !" , SCREEN_X_MAX / 4 , SCREEN_Y_MAX - 45);
+    msleep(15);
 }
 
 int main(void)
 {
 
-    /* Clear the homescreen */
     os_ClrHome();
     gfx_Begin();
 
-   /* Set the palette for sprites */
-    gfx_SetPalette(global_palette, sizeof_global_palette, 0);
-    gfx_SetTransparentColor(0);
-    gfx_FillScreen(2);
+    gfx_init();
+    gfx_sprite_t* sprite_buffer = gfx_MallocSprite(SPRITE_SIZE, SPRITE_SIZE);
+    if (sprite_buffer == NULL) return 1;
 
-    gfx_sprite_t* spriteBuffer = gfx_MallocSprite(SPRITE_SIZE, SPRITE_SIZE);
-    if (spriteBuffer == NULL) {
-        gfx_PrintStringXY("Failed to allocate memory for the sprite" , 0 ,0);
-        return 1;
+    do {
+        for (int i = 0; i < FRAME_NUMBER; i++) {
+            drawFrame(sprite_buffer , frames_data[i]);
+        };
     }
-    do {       
-        drawFrame(spriteBuffer , frame_0_compressed);
-        drawFrame(spriteBuffer , frame_0_compressed);
-        drawFrame(spriteBuffer , frame_1_compressed);
-        drawFrame(spriteBuffer , frame_2_compressed);
-        drawFrame(spriteBuffer , frame_3_compressed);
-        drawFrame(spriteBuffer , frame_4_compressed);
-        drawFrame(spriteBuffer , frame_5_compressed);
-        drawFrame(spriteBuffer , frame_6_compressed);
-        drawFrame(spriteBuffer , frame_7_compressed);
-        drawFrame(spriteBuffer , frame_8_compressed);
-        drawFrame(spriteBuffer , frame_9_compressed);
-        drawFrame(spriteBuffer , frame_10_compressed);
-        drawFrame(spriteBuffer , frame_11_compressed);
-        drawFrame(spriteBuffer , frame_12_compressed);
-        drawFrame(spriteBuffer , frame_13_compressed);
-        drawFrame(spriteBuffer , frame_14_compressed);
-        drawFrame(spriteBuffer , frame_15_compressed);
-        drawFrame(spriteBuffer , frame_16_compressed);
-        drawFrame(spriteBuffer , frame_17_compressed);
-        drawFrame(spriteBuffer , frame_18_compressed);
-        drawFrame(spriteBuffer , frame_19_compressed);
-        drawFrame(spriteBuffer , frame_20_compressed);
-        drawFrame(spriteBuffer , frame_21_compressed);
-        drawFrame(spriteBuffer , frame_22_compressed);
-        drawFrame(spriteBuffer , frame_23_compressed);
-        drawFrame(spriteBuffer , frame_24_compressed);
-        drawFrame(spriteBuffer , frame_25_compressed);
-        drawFrame(spriteBuffer , frame_26_compressed);
-        drawFrame(spriteBuffer , frame_27_compressed);
-        drawFrame(spriteBuffer , frame_28_compressed);
-        drawFrame(spriteBuffer , frame_29_compressed);
-        drawFrame(spriteBuffer , frame_30_compressed);
-        drawFrame(spriteBuffer , frame_31_compressed);
-        drawFrame(spriteBuffer , frame_32_compressed);
-        drawFrame(spriteBuffer , frame_33_compressed);
-        drawFrame(spriteBuffer , frame_34_compressed);
-        drawFrame(spriteBuffer , frame_35_compressed);
-        drawFrame(spriteBuffer , frame_36_compressed);
-        drawFrame(spriteBuffer , frame_37_compressed);
-        drawFrame(spriteBuffer , frame_38_compressed);
-        drawFrame(spriteBuffer , frame_39_compressed);
-
-    }
-    while (!os_GetCSC()); // wait for a key
+    while (key_press == false);
 
     gfx_End();
 
-    /* Return 0 for success */
     return 0;
 }
 
-
-    /*
-    gfx_SetDefaultPalette();
-    
-    gfx_SetDrawBuffer();
-
-    do {
-
-        //gfx_SetColor(color);
-        //gfx_SetTextFGColor(254);
-        //gfx_PrintStringXY("Os Major Version: " , 3 , SCREEN_Y_MAX - 10);
-        //gfx_PrintInt(majorVersion , 1);
-        gfx_SwapDraw();
-
-    } 
-    while (!os_GetCSC()); // wait for a key
-    */
-
-/*
-int x = 0;
-int y = 0;
-gfx_sprite_t *behind_sprite = gfx_MallocSprite(SPRITE_WIDTH, SPRITE_HEIGHT);
-
-// ...draw the background code  here...
-
-// set initial sprite state
-gfx_GetSprite(behind_sprite, x, y);
-gfx_TransparentSprite(sprite, x, y);
-
-do {
-    // if we don't need to move, loop
-    if (no_move) continue;
-
-    // clear out the old sprite
-    gfx_Sprite(behind_sprite, x, y);
-
-    // ...movement code here...
-    // updates x and y
-
-    // get the new background and draw the moved sprite
-    gfx_GetSprite(behind_sprite, x, y);
-    gfx_TransparentSprite(sprite, x, y);
-} while (moving);
-*/
-
-// Todo :
-// add a "You have been rickrolled" text
-// make it possible to exit without reseting RAM
-// refactor code

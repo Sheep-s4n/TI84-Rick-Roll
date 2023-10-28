@@ -11,9 +11,17 @@ converts:
     transparent-color-index: 0
     compress : 'zx0'
     images:
-      
+    
       - rickroll/frame_0.gif
       - rickroll/frame_1.gif
+      - rickroll/frame_2.gif
+      - rickroll/frame_3.gif
+      - rickroll/frame_4.gif
+      - rickroll/frame_5.gif
+      - rickroll/frame_6.gif
+      - rickroll/frame_7.gif
+      - rickroll/frame_8.gif
+      - rickroll/frame_9.gif
       - rickroll/frame_10.gif
       - rickroll/frame_11.gif
       - rickroll/frame_12.gif
@@ -24,7 +32,6 @@ converts:
       - rickroll/frame_17.gif
       - rickroll/frame_18.gif
       - rickroll/frame_19.gif
-      - rickroll/frame_2.gif
       - rickroll/frame_20.gif
       - rickroll/frame_21.gif
       - rickroll/frame_22.gif
@@ -35,7 +42,6 @@ converts:
       - rickroll/frame_27.gif
       - rickroll/frame_28.gif
       - rickroll/frame_29.gif
-      - rickroll/frame_3.gif
       - rickroll/frame_30.gif
       - rickroll/frame_31.gif
       - rickroll/frame_32.gif
@@ -46,26 +52,6 @@ converts:
       - rickroll/frame_37.gif
       - rickroll/frame_38.gif
       - rickroll/frame_39.gif
-      - rickroll/frame_4.gif
-      - rickroll/frame_40.gif
-      - rickroll/frame_41.gif
-      - rickroll/frame_42.gif
-      - rickroll/frame_43.gif
-      - rickroll/frame_44.gif
-      - rickroll/frame_45.gif
-      - rickroll/frame_46.gif
-      - rickroll/frame_47.gif
-      - rickroll/frame_48.gif
-      - rickroll/frame_49.gif
-      - rickroll/frame_5.gif
-      - rickroll/frame_50.gif
-      - rickroll/frame_51.gif
-      - rickroll/frame_52.gif
-      - rickroll/frame_53.gif
-      - rickroll/frame_6.gif
-      - rickroll/frame_7.gif
-      - rickroll/frame_8.gif
-      - rickroll/frame_9.gif
 
 outputs:
   - type: c
