@@ -68,7 +68,7 @@ void gfx_init() {
     gfx_FillScreen(2);
 }
 
-void drawFrame(gfx_sprite_t* sprite_buffer , unsigned char* frame_data) {
+void draw_frame(gfx_sprite_t* sprite_buffer , unsigned char* frame_data) {
     if (key_press) return;
     if (os_GetCSC()) key_press = true;
     zx0_Decompress(sprite_buffer , frame_data);
@@ -89,10 +89,10 @@ int main(void)
 
     do {
         for (int i = 0; i < FRAME_NUMBER; i++) {
-            drawFrame(sprite_buffer , frames_data[i]);
+            draw_frame(sprite_buffer , frames_data[i]);
+            if (key_press) break; 
         };
-    }
-    while (key_press == false);
+    } while (!key_press);
 
     gfx_End();
 
